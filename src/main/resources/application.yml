@@ -1,0 +1,13 @@
+server:
+  port: 5000
+  servlet:
+    context-path: /lingo
+spring:
+  datasource:
+    username: postgres
+    password: secret
+    url: jdbc:postgresql://localhost:54334/lingo
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update

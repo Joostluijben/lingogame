@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - 54334:5432
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: lingo
+
