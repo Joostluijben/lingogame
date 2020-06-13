@@ -24,6 +24,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
+    mavenOptions: '-Xmx1024m -DLINGOWORDS_URL=https://joostluijben-lingogame.herokuapp.com'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
@@ -34,4 +35,3 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 - script: bash <(curl -s https://codecov.io/bash) 
-
