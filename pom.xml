@@ -17,6 +17,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <sonar.projectKey>Joostluijben_lingogame</sonar.projectKey>
+        <sonar.organization>joostluijben</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>c7018e8b7f568b7e7a11d4d5703eb04fcb6d2099</sonar.login>
     </properties>
 
     <parent>
