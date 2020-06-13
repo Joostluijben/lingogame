@@ -15,6 +15,8 @@ steps:
     SonarCloud: 'sonarcloud'
     organization: 'joostluijben'
     scannerMode: 'Other'
+- script: docker-compose up
+  displayName: 'Start up the database'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -32,6 +34,4 @@ steps:
     checkStyleRunAnalysis: true
     pmdRunAnalysis: true
     findBugsRunAnalysis: true
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 - script: bash <(curl -s https://codecov.io/bash) 
