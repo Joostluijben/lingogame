@@ -181,7 +181,7 @@
                 <version>2.22.0</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <LINGOWORDS_URL>https://joostluijben-lingogame.herokuapp.com</LINGOWORDS_URL>
+                        <LINGOWORDS_URL>https://joostluijben-lingowords.herokuapp.com</LINGOWORDS_URL>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

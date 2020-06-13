@@ -26,7 +26,7 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx1024m -DLINGOWORDS_URL=https://joostluijben-lingogame.herokuapp.com'
+    mavenOptions: '-Xmx1024m -DLINGOWORDS_URL=https://joostluijben-lingowords.herokuapp.com'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
