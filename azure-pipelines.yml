@@ -15,7 +15,7 @@ steps:
     SonarCloud: 'sonarcloud'
     organization: 'joostluijben'
     scannerMode: 'Other'
-- script: docker-compose up
+- script: docker-compose up -d
   displayName: 'Start up the database'
 - task: Maven@3
   inputs:
