@@ -35,4 +35,5 @@ steps:
     sqMavenPluginVersionChoice: 'latest'
     checkStyleRunAnalysis: true
     pmdRunAnalysis: true
+- task: SonarCloudAnalyze@1
 - script: bash <(curl -s https://codecov.io/bash) 
