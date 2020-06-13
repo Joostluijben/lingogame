@@ -33,5 +33,4 @@ steps:
     sqMavenPluginVersionChoice: 'latest'
     checkStyleRunAnalysis: true
     pmdRunAnalysis: true
-    findBugsRunAnalysis: true
 - script: bash <(curl -s https://codecov.io/bash) 
