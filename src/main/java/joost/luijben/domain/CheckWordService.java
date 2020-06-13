@@ -10,11 +10,13 @@ public class CheckWordService {
 
     public static boolean isWordValid(String guessedWord, String toGuessWord, Set<Word> words) {
         boolean isValid = false;
-        if (toGuessWord.length() == guessedWord.length() &&
-                toGuessWord.charAt(0) == guessedWord.charAt(0) &&
-                Character.isLowerCase(guessedWord.charAt(0)) &&
-                !Pattern.matches("\\p{Punct}", guessedWord) &&
-                words.stream().anyMatch(word -> word.getValue().equals(guessedWord))) {
+        if (
+                guessedWord != null &&
+                        toGuessWord.length() == guessedWord.length() &&
+                        toGuessWord.charAt(0) == guessedWord.charAt(0) &&
+                        Character.isLowerCase(guessedWord.charAt(0)) &&
+                        !Pattern.matches("\\p{Punct}", guessedWord) &&
+                        words.stream().anyMatch(word -> word.getValue().equals(guessedWord))) {
             isValid = true;
         }
         return isValid;
