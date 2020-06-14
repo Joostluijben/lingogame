@@ -22,7 +22,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class CheckWordServiceTest {
+public class CheckWordServiceTest {
     private static final String fifeLetterToGuessWord = "preek";
     private static final String sixLetterToGuessWord = "prater";
     private static final String sevenLetterToGuessWord = "florist";
@@ -53,7 +53,7 @@ class CheckWordServiceTest {
     @DisplayName("Test the validity of a fife letter word")
     @ParameterizedTest
     @MethodSource("provideValuesAndResultVifeLetterWord")
-    void isWordValid(String guessedWord, String toGuessWord, boolean expectedResult) {
+    public void isWordValid(String guessedWord, String toGuessWord, boolean expectedResult) {
         // TODO check words with six and seven letters
         boolean result = CheckWordService.isWordValid(guessedWord, toGuessWord, words);
         assertEquals(expectedResult, result);
