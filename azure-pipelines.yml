@@ -14,6 +14,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+  - task: MavenAuthenticate@0
+    inputs:
+      mavenServiceConnections: 'github packages'
   - task: Cache@2
     inputs:
       key: 'maven | "$(Agent.OS)" | **/pom.xml'
@@ -52,3 +55,7 @@ steps:
       checkStyleRunAnalysis: true
       pmdRunAnalysis: true
   - script: bash <(curl -s https://codecov.io/bash) -t $(CODECOV_TOKEN)
+  - task: Bash@3
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    inputs:
+      script: mvn deploy
