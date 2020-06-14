@@ -31,7 +31,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        If ($(Build.SourceBranchName) -eq 'merge') {
+        If ('$(Build.SourceBranchName)' -eq 'merge') {
           echo "##vso[task.setvariable variable=branchName]$(System.PullRequest.SourceBranch)"
         } Else {
           echo "##vso[task.setvariable variable=branchName]$(Build.SourceBranchName)"
