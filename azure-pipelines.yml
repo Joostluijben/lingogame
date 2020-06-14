@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+variables:
+  MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
+  MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Cache@2
+    inputs:
+      key: 'maven | "$(Agent.OS)" | **/pom.xml'
+      restoreKeys: |
+        maven | "$(Agent.OS)"
+        maven
+      path: $(MAVEN_CACHE_FOLDER)
+    displayName: Cache Maven local repo
+  - powershell:
+    env:
+      SONAR_TOKEN: $(SONAR_TOKEN)
+  - script: docker-compose up -d
+    displayName: 'Start up the database'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        If ('$(Build.SourceBranchName)' -eq 'merge') {
+          echo "##vso[task.setvariable variable=branchName]$(System.PullRequest.SourceBranch)"
+        } Else {
+          echo "##vso[task.setvariable variable=branchName]$(Build.SourceBranchName)"
+        }
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      codeCoverageToolOption: 'JaCoCo'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      mavenVersionOption: 'Default'
+      mavenOptions: '-Xmx1024m $(MAVEN_OPTS) -DLINGOWORDS_URL=https://joostluijben-lingowords.herokuapp.com -Dsonar.branch.name=$(branchName)' 
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      checkStyleRunAnalysis: true
+      pmdRunAnalysis: true
+  - script: bash <(curl -s https://codecov.io/bash) -t $(CODECOV_TOKEN)
