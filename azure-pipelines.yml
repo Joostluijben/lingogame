@@ -39,7 +39,7 @@ steps:
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      goals: 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar'
+      goals: 'clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       codeCoverageToolOption: 'JaCoCo'
