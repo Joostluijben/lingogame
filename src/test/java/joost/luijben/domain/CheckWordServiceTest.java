@@ -31,7 +31,7 @@ public class CheckWordServiceTest {
     @BeforeAll
     static void initialize() {
         Integer wordLength = 5;
-        String requestUrl = System.getenv("LINGOWORDS_URL") + "/words";
+        String requestUrl = System.getProperty("LINGOWORDS_URL") + "/words";
         if (wordLength != null) {
             requestUrl += "?wordLength=" + wordLength;
         }

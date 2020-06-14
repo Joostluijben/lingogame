@@ -12,11 +12,11 @@ public class CheckWordService {
         boolean isValid = false;
         if (
                 guessedWord != null &&
-                        toGuessWord.length() == guessedWord.length() &&
-                        toGuessWord.charAt(0) == guessedWord.charAt(0) &&
-                        Character.isLowerCase(guessedWord.charAt(0)) &&
-                        !Pattern.matches("\\p{Punct}", guessedWord) &&
-                        words.stream().anyMatch(word -> word.getValue().equals(guessedWord))) {
+                toGuessWord.length() == guessedWord.length() &&
+                toGuessWord.charAt(0) == guessedWord.charAt(0) &&
+                Character.isLowerCase(guessedWord.charAt(0)) &&
+                !Pattern.matches("\\p{Punct}", guessedWord) &&
+                words.stream().anyMatch(word -> word.getValue().equals(guessedWord))) {
             isValid = true;
         }
         return isValid;
