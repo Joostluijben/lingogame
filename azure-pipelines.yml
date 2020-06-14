@@ -58,4 +58,5 @@ steps:
   - task: Bash@3
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
     inputs:
+      targetType: 'inline'
       script: mvn deploy
