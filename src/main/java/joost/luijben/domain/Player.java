@@ -7,6 +7,9 @@ public class Player {
     private String name;
     private Set<Game> games;
 
+    public Player() {
+    }
+
     public Player(String name) {
         this.name = name;
         this.games = new HashSet<>();

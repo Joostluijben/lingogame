@@ -4,10 +4,7 @@ import joost.luijben.infrastructure.output.game.jpa.GameEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -17,6 +14,7 @@ public class PlayerEntity {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(unique = true)
     private String name;
     @OneToMany(mappedBy = "player")
     private Set<GameEntity> games;
