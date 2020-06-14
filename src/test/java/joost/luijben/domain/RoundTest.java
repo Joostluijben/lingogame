@@ -19,7 +19,7 @@ public class RoundTest {
 
     @Test
     public void returnCorrectWordIfAlreadyWon() {
-        Round round = new Round(words, null);
+        Round round = new Round(words, 5);
         round.setWon(true);
         RoundDto roundDto = round.makeTurn("flora", words);
         Assert.assertArrayEquals(roundDto.getTurn().getFeedbacks().toArray(), List.of(
