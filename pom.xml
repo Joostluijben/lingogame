@@ -20,7 +20,7 @@
         <sonar.projectKey>Joostluijben_lingogame</sonar.projectKey>
         <sonar.organization>joostluijben</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.branch.name>${sonar.branch.name}</sonar.branch.name>
+        <sonar.branch.name>master</sonar.branch.name>
     </properties>
 
     <parent>
