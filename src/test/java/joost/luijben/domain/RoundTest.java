@@ -21,6 +21,7 @@ public class RoundTest {
     public void returnCorrectWordIfAlreadyWon() {
         Round round = new Round(words, 5);
         round.setWon(true);
+        round.setWord("flora");
         RoundDto roundDto = round.makeTurn("flora", words);
         Assert.assertArrayEquals(roundDto.getTurn().getFeedbacks().toArray(), List.of(
                 new Feedback('f', Status.Correct),
