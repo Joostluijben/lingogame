@@ -30,11 +30,9 @@ public class CheckWordServiceTest {
 
     @BeforeAll
     static void initialize() {
-        Integer wordLength = 5;
+        int wordLength = 5;
         String requestUrl = System.getProperty("LINGOWORDS_URL") + "/words";
-        if (wordLength != null) {
-            requestUrl += "?wordLength=" + wordLength;
-        }
+        requestUrl += "?wordLength=" + wordLength;
         List<Word> words = RestAssured.get(requestUrl)
                 .then().extract().body().jsonPath().getList(".", Word.class);
         CheckWordServiceTest.words = new HashSet<>(words);
