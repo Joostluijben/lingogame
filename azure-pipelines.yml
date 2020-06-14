@@ -16,7 +16,7 @@ pool:
 steps:
   - task: MavenAuthenticate@0
     inputs:
-      mavenServiceConnections: 'github packages'
+      mavenServiceConnections: 'lingogame github packages'
   - task: Cache@2
     inputs:
       key: 'maven | "$(Agent.OS)" | **/pom.xml'
