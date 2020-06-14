@@ -6,7 +6,8 @@ import java.util.*;
 
 public class Round {
     private final Integer maxTurnAmount = 5;
-    private final Integer pointsPerTurn = 10;
+    private static Integer POINTS_PER_TURN = 10;
+    private static Integer TIMER_SECONDS = 10;
     private boolean won;
     private Integer id;
     private List<Turn> turns;
@@ -26,9 +27,9 @@ public class Round {
 
     public RoundDto makeTurn(String inputWord, Set<Word> words) {
         Turn turn = new Turn();
-        if (!won || turns.size() > maxTurnAmount) {
+        if (!won && !(turns.size() >= maxTurnAmount)) {
             if (turns.size() > 0) {
-                if (turn.getTime().plusSeconds(10).compareTo(Instant.now()) > 0) {
+                if (turn.getTime().plusSeconds(TIMER_SECONDS).compareTo(Instant.now()) >= 0) {
                     calculateTurn(inputWord, words, turn);
                 } else {
                     turn.setFeedbacks(CheckWordService.renderWordInvalid(inputWord));
@@ -59,7 +60,7 @@ public class Round {
     }
 
     public void calculateScoreForRound() {
-        score = (maxTurnAmount - this.turns.size()) * pointsPerTurn;
+        score = (maxTurnAmount - this.turns.size()) * POINTS_PER_TURN;
     }
 
     public boolean isWon() {
