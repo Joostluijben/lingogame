@@ -103,4 +103,32 @@ public class CheckWordServiceTest {
         }
         return expectedFeebacks;
     }
+
+    private static Set<Arguments> provideGuessWordGuessedWordAndResultArray() {
+        return Set.of(
+                Arguments.of("lingi", "lingo", List.of(
+                        new Feedback('l', Status.Correct), new Feedback('i', Status.Correct),
+                        new Feedback('n', Status.Correct), new Feedback('g', Status.Correct),
+                        new Feedback('i', Status.Absent))
+                ),
+                Arguments.of("faria", "fraai", List.of(
+                        new Feedback('f', Status.Correct), new Feedback('a', Status.Present),
+                        new Feedback('r', Status.Present), new Feedback('i', Status.Present),
+                        new Feedback('a', Status.Present))
+                ),
+                Arguments.of("lpele", "lepel", List.of(
+                        new Feedback('l', Status.Correct),
+                        new Feedback('p', Status.Present),
+                        new Feedback('e', Status.Present),
+                        new Feedback('l', Status.Present),
+                        new Feedback('e', Status.Present)
+                ))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideGuessWordGuessedWordAndResultArray")
+    public void testCalculateFeedBack(String guessedWord, String toGuessWord, List<Feedback> resultArray) {
+        assertArrayEquals(resultArray.toArray(), CheckWordService.calculateFeedback(guessedWord, toGuessWord).toArray());
+    }
 }

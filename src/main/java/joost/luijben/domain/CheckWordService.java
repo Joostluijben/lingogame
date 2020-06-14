@@ -38,16 +38,17 @@ public class CheckWordService {
         List<Feedback> feedbacks = new ArrayList<>();
         feedbacks.add(new Feedback(guessedWord.charAt(0), Status.Correct));
 
-        for (int i = 1; i < toGuessWord.length(); i++) {
+        for (int i = 1; i < stringBuilderGuessedWord.length(); i++) {
             if (guessedWord.charAt(i) == toGuessWord.charAt(i)) {
-                stringBuilderGuessedWord.replace(i, i + 1, "_");
+                stringBuilderToGuessWord.replace(i, i + 1, "_");
                 positions[i] = 2;
             }
         }
 
-        for (int i = 1; i < guessedWord.length(); i++) {
+        for (int i = 1; i < stringBuilderGuessedWord.length(); i++) {
             if (stringBuilderToGuessWord.toString().contains(String.valueOf(stringBuilderGuessedWord.charAt(i)))) {
-                stringBuilderToGuessWord = new StringBuilder(stringBuilderToGuessWord.toString().replaceFirst(String.valueOf(stringBuilderToGuessWord.toString().charAt(i)), "_"));
+                int indexOfLetterInToGuessWord = stringBuilderToGuessWord.indexOf(String.valueOf(stringBuilderGuessedWord.charAt(i)));
+                stringBuilderToGuessWord.replace(indexOfLetterInToGuessWord, indexOfLetterInToGuessWord + 1, "_");
                 positions[i] = 1;
             }
         }
