@@ -40,13 +40,13 @@ steps:
         } Else {
           echo "##vso[task.setvariable variable=branchName]$(Build.SourceBranchName)"
         }
+  - powershell: Write-Host $(brancName)
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean package sonar:sonar'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      codeCoverageToolOption: 'JaCoCo'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: '1.11'
       mavenVersionOption: 'Default'
@@ -56,6 +56,11 @@ steps:
       checkStyleRunAnalysis: true
       pmdRunAnalysis: true
   - script: bash <(curl -s https://codecov.io/bash) -t $(CODECOV_TOKEN)
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)/target'
+      artifact: 'drop'
+      publishLocation: 'pipeline'
   - task: Bash@3
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
     inputs:
