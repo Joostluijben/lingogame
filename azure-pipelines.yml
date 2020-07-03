@@ -32,7 +32,6 @@ steps:
       scannerMode: 'Other'
   - script: docker-compose up -d
     displayName: 'Start up the database'
-  - powershell: Write-Host $(branchName)
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
