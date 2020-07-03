@@ -30,27 +30,27 @@ steps:
       SONAR_TOKEN: $(SONAR_TOKEN)
   - script: docker-compose up -d
     displayName: 'Start up the database'
-  # - task: PowerShell@2
-  #   inputs:
-  #     targetType: 'inline'
-  #     script: |
-  #       Write-Host $(Build.SourceBranchName)
-  #       If ('$(Build.SourceBranchName)' -eq 'merge') {
-  #         echo "##vso[task.setvariable variable=branchName]$(System.PullRequest.SourceBranch)"
-  #       } Else {
-  #         echo "##vso[task.setvariable variable=branchName]$(Build.SourceBranchName)"
-  #       }
-  # - powershell: Write-Host $(branchName)
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host $(Build.SourceBranchName)
+        If ('$(Build.SourceBranchName)' -eq 'merge') {
+          echo "##vso[task.setvariable variable=branchName]$(System.PullRequest.SourceBranch)"
+        } Else {
+          echo "##vso[task.setvariable variable=branchName]$(Build.SourceBranchName)"
+        }
+  - powershell: Write-Host $(branchName)
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      goals: 'clean package sonar:sonar'
+      goals: 'clean verify sonar:sonar'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: '1.11'
       mavenVersionOption: 'Default'
-      mavenOptions: '-Xmx1024m $(MAVEN_OPTS) -DLINGOWORDS_URL=https://joostluijben-lingowords.herokuapp.com' 
+      mavenOptions: '-Xmx1024m $(MAVEN_OPTS) -DLINGOWORDS_URL=https://joostluijben-lingowords.herokuapp.com -Dsonar.branch.name=$(branchName)' 
       mavenAuthenticateFeed: false
       effectivePomSkip: false
       checkStyleRunAnalysis: true
