@@ -35,7 +35,7 @@ steps:
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
-      goals: 'clean verify sonar:sonar'
+      goals: 'clean verify'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
@@ -50,7 +50,6 @@ steps:
   - task: SonarCloudPublish@1
     inputs:
       pollingTimeoutSec: '300'
-  - script: bash <(curl -s https://codecov.io/bash) -t $(CODECOV_TOKEN)
   - task: Bash@3
     condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
     inputs:
