@@ -30,7 +30,7 @@ steps:
       SONAR_TOKEN: $(SONAR_TOKEN)
   - script: docker-compose up -d
     displayName: 'Start up the database'
-  - task: PowerShell@2
+  # - task: PowerShell@2
   #   inputs:
   #     targetType: 'inline'
   #     script: |
